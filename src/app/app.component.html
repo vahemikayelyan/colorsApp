@@ -1,1 +1,24 @@
+<nav>
+  <mat-toolbar color="primary">
+    <a mat-button routerLink="home" routerLinkActive="nav-selected"
+      ><mat-icon>home</mat-icon><span>Home</span
+      ><span class="mat-button-focus-overlay"></span
+    ></a>
+
+    <a mat-button routerLink="editor" routerLinkActive="nav-selected"
+      ><span>Editor</span><span class="mat-button-focus-overlay"></span
+    ></a>
+
+    <span class="example-spacer"></span>
+
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with share icon"
+    >
+      <mat-icon>share</mat-icon>
+    </button>
+  </mat-toolbar>
+</nav>
+
 <router-outlet></router-outlet>

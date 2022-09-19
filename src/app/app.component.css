@@ -1,0 +1,12 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  height: 56px;
+}
+
+nav .nav-selected {
+  background: rgba(0, 0, 0, 0.1);
+}
