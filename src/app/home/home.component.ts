@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SharedService } from '../services/shared.service';
+import { read, WorkBook, utils } from 'xlsx';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -11,12 +13,17 @@ import { SharedService } from '../services/shared.service';
 export class HomeComponent {
   displayedColumns: string[] = ['position', 'name', 'rgb', 'symbol', 'color'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  excelSubscription?: Subscription;
   colorName: string = '';
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
   constructor(private sharedService: SharedService) {}
+
+  ngOnInit() {
+    //this.readExcelSheet();
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -46,14 +53,48 @@ export class HomeComponent {
   printPage(color: string) {
     this.sharedService.printPage(color);
   }
+
+  readExcelSheet() {
+    this.excelSubscription = this.sharedService
+      .getExcelSheet()
+      .subscribe((data) => {
+        const fileReader: FileReader = new FileReader();
+
+        fileReader.readAsBinaryString(data);
+        fileReader.onloadend = (e) => {
+          const binaryData = e.target?.result;
+          const workBook: WorkBook = read(binaryData, { type: 'binary' });
+          let tableData: PeriodicElement[] = [];
+          let position: number = 0;
+
+          workBook.SheetNames.forEach((seetName) => {
+            const sheetData: PeriodicElement[] = utils.sheet_to_json(
+              workBook.Sheets[seetName]
+            );
+            sheetData.forEach((row) => {
+              position++;
+              tableData.push({ ...row, position, color: row.color });
+            });
+          });
+
+          this.dataSource.data = tableData;
+        };
+      });
+  }
+
+  ngOnDestroy() {
+    if (this.excelSubscription) {
+      this.excelSubscription.unsubscribe();
+    }
+  }
 }
 
 export interface PeriodicElement {
-  position: number;
-  name: string;
-  rgb: number;
-  symbol: string;
-  color: string;
+  position?: number;
+  name?: string;
+  rgb?: number;
+  symbol?: string;
+  color?: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
