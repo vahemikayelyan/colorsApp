@@ -10,3 +10,38 @@
 nav .nav-selected {
   background: rgba(0, 0, 0, 0.1);
 }
+
+.mat-form-field {
+  width: 70%;
+}
+
+#printContainer {
+  display: none;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+  padding: 0;
+}
+
+@media print {
+  #mainContainer,
+  nav {
+    display: none;
+  }
+
+  #printContainer {
+    display: block;
+  }
+
+  #printContainer .print-page {
+    width: 210mm;
+    min-height: 297mm;
+    background: brown;
+    -webkit-print-color-adjust: exact;
+    -moz-print-color-adjust: exact;
+    -ms-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

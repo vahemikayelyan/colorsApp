@@ -1,0 +1,20 @@
+#dataGrid {
+  position: absolute;
+  bottom: 30px;
+  top: 80px;
+  right: 20px;
+  left: 20px;
+}
+
+table {
+  width: 100%;
+}
+
+::ng-deep .color-name .mat-form-field-wrapper {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.mat-form-field {
+  width: 70%;
+}
