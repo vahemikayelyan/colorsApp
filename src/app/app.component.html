@@ -1,6 +1,10 @@
 <nav>
   <mat-toolbar color="primary">
-    <a mat-button routerLink="home" routerLinkActive="nav-selected"
+    <a
+      mat-button
+      routerLink=""
+      routerLinkActive="nav-selected"
+      [routerLinkActiveOptions]="{ exact: true }"
       ><mat-icon>home</mat-icon><span>Home</span
       ><span class="mat-button-focus-overlay"></span
     ></a>
