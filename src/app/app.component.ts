@@ -16,7 +16,6 @@ import { SharedService } from './services/shared.service';
 export class AppComponent implements OnDestroy {
   @ViewChild('printPage', { static: false }) printPage: ElementRef | undefined;
   printSubscription: Subscription | undefined;
-  title = 'colorsApp';
 
   constructor(
     private sharedService: SharedService,
