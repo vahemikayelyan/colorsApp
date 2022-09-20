@@ -1,4 +1,11 @@
-import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  Renderer2,
+  OnDestroy,
+} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { SharedService } from './services/shared.service';
 
 @Component({
@@ -6,8 +13,9 @@ import { SharedService } from './services/shared.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   @ViewChild('printPage', { static: false }) printPage: ElementRef | undefined;
+  printSubscription: Subscription | undefined;
   title = 'colorsApp';
 
   constructor(
@@ -16,15 +24,21 @@ export class AppComponent {
   ) {}
 
   ngOnInit() {
-    this.sharedService.printObservable.subscribe((color) => {
-      if (this.printPage) {
-        this.renderer.setStyle(
-          this.printPage.nativeElement,
-          'background',
-          color
-        );
-        window.print();
+    this.printSubscription = this.sharedService.printObservable.subscribe(
+      (color) => {
+        if (this.printPage) {
+          this.renderer.setStyle(
+            this.printPage.nativeElement,
+            'background',
+            color
+          );
+          window.print();
+        }
       }
-    });
+    );
+  }
+
+  ngOnDestroy() {
+    this.printSubscription?.unsubscribe();
   }
 }
