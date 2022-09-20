@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 })
 export class SharedService {
   printSubject = new Subject<string>();
+  printObservable = this.printSubject.asObservable();
 
   constructor() {}
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { SharedService } from './services/shared.service';
 
 @Component({
@@ -7,13 +7,24 @@ import { SharedService } from './services/shared.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  @ViewChild('printPage', { static: false }) printPage: ElementRef | undefined;
   title = 'colorsApp';
 
-  constructor(private sharedService: SharedService) {}
+  constructor(
+    private sharedService: SharedService,
+    private renderer: Renderer2
+  ) {}
 
   ngOnInit() {
-    this.sharedService.printSubject.subscribe((color) => {
-      window.print();
+    this.sharedService.printObservable.subscribe((color) => {
+      if (this.printPage) {
+        this.renderer.setStyle(
+          this.printPage.nativeElement,
+          'background',
+          color
+        );
+        window.print();
+      }
     });
   }
 }
