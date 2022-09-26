@@ -29,7 +29,7 @@ export class AppComponent implements OnDestroy {
           this.renderer.setStyle(
             this.printPage.nativeElement,
             'background',
-            color
+            `rgb${color}`
           );
           window.print();
         }
