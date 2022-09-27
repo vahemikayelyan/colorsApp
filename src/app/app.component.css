@@ -36,6 +36,8 @@ nav .nav-selected {
   }
 
   #printContainer .print-page {
+    margin: 0;
+    padding: 0;
     width: 210mm;
     min-height: 297mm;
     -webkit-print-color-adjust: exact;

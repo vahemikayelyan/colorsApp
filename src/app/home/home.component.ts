@@ -11,7 +11,14 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  displayedColumns: string[] = ['position', 'name', 'rgb', 'symbol', 'color'];
+  displayedColumns: string[] = [
+    'position',
+    'name',
+    'color_number',
+    'rgb',
+    'symbol',
+    'color',
+  ];
   dataSource = new MatTableDataSource<ColorElement>();
   excelSubscription?: Subscription;
   colorName: string = '';
@@ -89,6 +96,7 @@ export class HomeComponent {
 export interface ColorElement {
   position?: number;
   name?: string;
+  color_number?: string;
   rgb?: number;
   hex?: string;
 }
