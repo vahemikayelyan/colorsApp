@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { SharedService } from '../services/shared.service';
-import { read, WorkBook, utils } from 'xlsx';
 import { Subscription } from 'rxjs';
+import { read, utils, WorkBook } from 'xlsx';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-home',

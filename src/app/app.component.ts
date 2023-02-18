@@ -1,9 +1,9 @@
 import {
   Component,
   ElementRef,
-  ViewChild,
-  Renderer2,
   OnDestroy,
+  Renderer2,
+  ViewChild,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SharedService } from './services/shared.service';
