@@ -14,9 +14,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, EditorComponent],
+  declarations: [AppComponent, HomeComponent, EditorComponent, AboutComponent, ContactComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
